@@ -10,12 +10,10 @@
 </head>
 
 <body class="relative min-h-screen overflow-hidden bg-gray-950">
-    <!-- Background -->
     <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(17,24,39,0.8)_0%,_rgba(0,0,0,1)_100%)]">
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,...')] opacity-10"></div>
     </div>
 
-    <!-- Navbar -->
     <nav class="relative z-10 w-full px-6 py-4 bg-gray-900/80 backdrop-blur-md border-b border-gray-800 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold text-white tracking-tight">VAGASYNC</h1>
@@ -32,10 +30,8 @@
         </div>
     </nav>
 
-    <!-- Conteúdo -->
     <div class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] px-6 text-center">
 
-        <!-- Avatar -->
         <div class="mb-6">
             <div class="w-32 h-32 rounded-full bg-gray-800 flex items-center justify-center shadow-inner mx-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-gray-500" fill="currentColor"
@@ -52,12 +48,10 @@
             oportunidades.
         </p>
 
-        <!-- Cartão de perfil -->
         <form th:object="${user}">
             <div
                 class="w-full max-w-4xl bg-gray-900/95 backdrop-blur-xl p-10 rounded-2xl border border-gray-800 shadow-[0_0_40px_-10px_rgba(99,102,241,0.15)] text-left space-y-8">
 
-                <!-- Campo: Nome -->
                 <div class="grid grid-cols-5 gap-4 items-center border-b border-gray-700 pb-4">
                     <span class="text-gray-400 font-medium col-span-2">Nome</span>
                     <div class="col-span-3 flex justify-between items-center gap-4">
@@ -72,7 +66,6 @@
                     </div>
                 </div>
 
-                <!-- Campo: Usuário -->
                 <div class="grid grid-cols-5 gap-4 items-center border-b border-gray-700 pb-4">
                     <span class="text-gray-400 font-medium col-span-2">Usuário</span>
                     <div class="col-span-3 flex justify-between items-center gap-4">
@@ -87,7 +80,6 @@
                     </div>
                 </div>
 
-                <!-- Campo: Email -->
                 <div class="grid grid-cols-5 gap-4 items-center border-b border-gray-700 pb-4">
                     <span class="text-gray-400 font-medium col-span-2">Email</span>
                     <div class="col-span-3 flex justify-between items-center gap-4">
@@ -102,7 +94,6 @@
                     </div>
                 </div>
 
-                <!-- Campo: Descrição -->
                 <div class="grid grid-cols-5 gap-4 items-start border-b border-gray-700 pb-4">
                     <span class="text-gray-400 font-medium col-span-2 mt-1">Descrição</span>
                     <div class="col-span-3 flex justify-between items-start gap-4">

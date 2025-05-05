@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.ApplyJobService;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.CandidateService;
+import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.CreateCandidateService;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.FindJobsService;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
 
@@ -36,6 +37,7 @@ public class CandidateController {
     private final ProfileCandidateService profileCandidateService;
     private final FindJobsService findJobsService;
     private final ApplyJobService applyJobService;
+    private final CreateCandidateService createCandidateService;
 
     @GetMapping("/login")
     public String login() {
@@ -104,11 +106,6 @@ public class CandidateController {
         return "redirect:/candidate/jobs";
     }
 
-    private String getToken() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getDetails().toString();
-    }
-
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("candidate", new CreateCandidateDTO());
@@ -116,9 +113,21 @@ public class CandidateController {
     }
 
     @PostMapping("/create")
-    public String save(CreateCandidateDTO candidate) {
-        System.out.println(candidate.getName());
-        return "redirect:/candidate/login";
+    public String save(RedirectAttributes redirectAttributes, CreateCandidateDTO candidate, Model model) {
+        try {
+            this.createCandidateService.execute(candidate);
+        } catch (HttpClientErrorException e) {
+            System.out.println("Error: " + e.getResponseBodyAsString());
+            redirectAttributes.addFlashAttribute("error_message", e.getResponseBodyAsString());
+        }
+
+        model.addAttribute("candidate", candidate);
+        return "redirect:/candidate/create";
+    }
+
+    private String getToken() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getDetails().toString();
     }
 
 }
