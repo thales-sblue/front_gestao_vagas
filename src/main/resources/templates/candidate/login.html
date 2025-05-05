@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@heroicons/v2.0.18/24/outline/index.js"></script>
+    <title>Cadastro do candidato</title>
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen overflow-hidden bg-gray-950">
+    <!-- Background animado -->
+    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(17,24,39,0.9)_0%,_rgba(0,0,0,1)_100%)]">
+        <div class="absolute inset-0 opacity-15 pointer-events-none">
+            <div class="absolute w-2 h-2 bg-purple-500 rounded-full float-animation" style="top:20%; left:15%"></div>
+            <div class="absolute w-1.5 h-1.5 bg-blue-400 rounded-full float-animation"
+                style="top:70%; left:85%; animation-delay: -2s"></div>
+            <div class="absolute w-1 h-1 bg-indigo-400 rounded-full float-animation"
+                style="top:45%; left:65%; animation-delay: -1s"></div>
+        </div>
+    </div>
+
+    <form action="" class="relative z-10 flex flex-col items-center justify-center h-screen"
+        th:action="@{/candidate/signIn}" method="post">
+        <div class="space-y-8 max-w-xs w-full px-4">
+            <!-- Logo animado -->
+            <h1
+                class="text-4xl font-black text-center mb-8 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent tracking-tighter hover:scale-105 transition-transform duration-300">
+                VAGASYNC
+            </h1>
+
+            <!-- Container do formulário -->
+            <div
+                class="space-y-5 bg-gray-900/95 backdrop-blur-xl p-6 rounded-xl border border-gray-800/50 shadow-[0_0_30px_-5px_rgba(99,102,241,0.2)] hover:shadow-[0_0_40px_-5px_rgba(99,102,241,0.3)] transition-all">
+                <!-- Campo de usuário -->
+                <div class="relative">
+                    <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <input type="text" name="username" placeholder="Username"
+                        class="w-full bg-gray-800/50 text-gray-200 pl-10 pr-4 py-2.5 rounded-lg focus:ring-2 focus:ring-purple-600 focus:outline-none placeholder-gray-500 border border-gray-700/50 hover:border-purple-500/30 transition-all">
+                </div>
+
+                <!-- Campo de senha -->
+                <div class="relative">
+                    <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <input type="password" name="password" placeholder="Password"
+                        class="w-full bg-gray-800/50 text-gray-200 pl-10 pr-4 py-2.5 rounded-lg focus:ring-2 focus:ring-purple-600 focus:outline-none placeholder-gray-500 border border-gray-700/50 hover:border-purple-500/30 transition-all">
+                </div>
+
+                <!-- Mensagem de erro -->
+                <div th:if="${error_message}"
+                    class="flex items-center space-x-2 text-red-400 bg-red-500/10 p-3 rounded-lg border border-red-500/20 text-sm">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span th:text="${error_message}"></span>
+                </div>
+
+                <!-- Botão de login -->
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-gray-100 py-2.5 rounded-lg font-semibold hover:shadow-[0_0_25px_-5px_rgba(99,102,241,0.4)] transition-all transform active:scale-95">
+                    Entrar
+                </button>
+
+                <!-- Link de cadastro -->
+                <div class="text-center pt-4">
+                    <a href="/candidate/create" class=" text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors inline-flex
+                        items-center">
+                        <span>Criar nova conta</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Efeitos de partículas -->
+    <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top:30%; left:20%"></div>
+        <div class="absolute w-1 h-1 bg-purple-400 rounded-full animate-pulse" style="top:65%; left:75%"></div>
+        <div class="absolute w-1 h-1 bg-blue-400 rounded-full animate-pulse" style="top:50%; left:90%"></div>
+    </div>
+</body>
+
+</html>

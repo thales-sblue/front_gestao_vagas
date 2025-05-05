@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@heroicons/v2.0.18/24/outline/index.js"></script>
+    <title>Buscar Vagas</title>
+    <style>
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen overflow-hidden bg-gray-950">
+    <!-- Background -->
+    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(17,24,39,0.8)_0%,_rgba(0,0,0,1)_100%)]">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,...')] opacity-10"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="relative z-10 w-full px-6 py-4 bg-gray-900/80 backdrop-blur-md border-b border-gray-800 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-white tracking-tight">VAGASYNC</h1>
+            <div class="flex space-x-6 items-center">
+                <a href="/candidate/profile"
+                    class="text-gray-300 hover:text-purple-400 transition-colors duration-200 font-medium">Perfil</a>
+                <a href="/candidate/jobs"
+                    class="text-gray-300 hover:text-purple-400 transition-colors duration-200 font-medium">Vagas</a>
+                <a href="/candidate/login"
+                    class="text-red-400 hover:text-red-100 transition-colors duration-200 font-medium px-2 py-1 rounded-lg border border-red-400/20 hover:border-red-300/40">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="relative z-10 flex flex-col items-center h-[calc(100vh-5rem)] px-6 py-10 overflow-y-auto">
+
+        <!-- Cabeçalho e Busca -->
+        <div class="w-full max-w-4xl mb-10 space-y-8">
+            <div>
+                <h2 class="text-white text-3xl md:text-4xl font-semibold mb-2">Encontre Sua Vaga</h2>
+                <p class="text-gray-400">Busque por termos específicos na descrição das vagas</p>
+            </div>
+
+            <!-- Barra de Busca -->
+            <form th:action="@{/candidate/jobs}" method="get" class="relative group">
+                <div
+                    class="absolute inset-0 bg-purple-500/10 rounded-2xl blur opacity-0 group-focus-within:opacity-100 transition-opacity">
+                </div>
+                <div class="relative">
+                    <div
+                        class="flex items-center bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-800 shadow-[0_0_40px_-10px_rgba(99,102,241,0.15)] px-4 py-3 hover:border-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <input type="text" id="searchInput" name="filter" placeholder="Ex: Java, Pleno, Home Office..."
+                            class="flex-1 bg-transparent text-gray-200 placeholder-gray-600 focus:outline-none focus:ring-0 text-lg"
+                            th:value="${param.filter}" />
+                        <button type="submit"
+                            class="ml-4 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl text-white font-medium transition-colors flex items-center">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-sm mt-2 ml-1">
+                    🔍 Digite termos que aparecem nas descrições das vagas
+                </p>
+            </form>
+        </div>
+
+        <!-- Container de Conteúdo -->
+        <div class="w-full max-w-4xl space-y-6 pb-20">
+
+            <!-- Estado Inicial (Antes da Busca) -->
+            <div th:unless="${param.filter}" class="text-center py-20">
+                <div class="text-purple-400 mx-auto mb-6">
+                    <svg class="w-32 h-32 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl text-gray-300 mb-4 font-semibold">Vamos começar sua busca!</h3>
+                <div class="text-gray-400 max-w-md mx-auto space-y-2">
+                    <p>Exemplos de termos para pesquisa:</p>
+                    <div class="flex flex-wrap gap-4 justify-center mt-4">
+                        <span class="px-3 py-1 bg-gray-800 rounded-full text-purple-400">Java</span>
+                        <span class="px-3 py-1 bg-gray-800 rounded-full text-purple-400">Pleno</span>
+                        <span class="px-3 py-1 bg-gray-800 rounded-full text-purple-400">Home Office</span>
+                        <span class="px-3 py-1 bg-gray-800 rounded-full text-purple-400">CLT</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultados da Busca -->
+            <div th:if="${param.filter}">
+                <!-- Cards de Vagas -->
+                <div th:each="job : ${jobs}"
+                    class="bg-gray-900/95 backdrop-blur-xl p-6 rounded-2xl border border-gray-800 shadow-[0_0_40px_-10px_rgba(99,102,241,0.15)] mb-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold text-white mb-2" th:text="${job.description}"></h3>
+                            <div class="flex items-center gap-4 text-gray-400 text-sm mb-3">
+                                <span class="flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    <span th:text="${job.level}"></span>
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <span th:text="${#temporals.format(job.createdAt, 'dd/MM/yyyy')}"></span>
+                                </span>
+                            </div>
+                            <div class="text-gray-300" th:if="${job.benefits}">
+                                <h4 class="font-medium text-gray-400 mb-1">Benefícios:</h4>
+                                <p class="text-gray-300 leading-relaxed" th:text="${job.benefits}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <form th:action="@{/candidate/jobs/apply}" method="post">
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <input type="hidden" name="jobId" th:value="${job.id}" />
+                            <span>Publicado em: <span
+                                    th:text="${#temporals.format(job.createdAt, 'dd/MM/yyyy')}"></span></span>
+                            <button
+                                class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-medium transition-colors">
+                                Candidatar-se
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Estado Vazio -->
+                <div th:if="${#lists.isEmpty(jobs)}" class="text-center py-20">
+                    <div class="text-purple-400 mx-auto mb-6">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl text-gray-300 mb-2">Nenhum resultado encontrado</h3>
+                    <p class="text-gray-600">Tente usar termos diferentes ou mais genéricos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Submit automático com Enter
+        document.getElementById('searchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.querySelector('form').submit();
+            }
+        });
+    </script>
+</body>
+
+</html>
