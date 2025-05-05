@@ -116,6 +116,7 @@ public class CandidateController {
     public String save(RedirectAttributes redirectAttributes, CreateCandidateDTO candidate, Model model) {
         try {
             this.createCandidateService.execute(candidate);
+            redirectAttributes.addFlashAttribute("success_message", "Conta criada com sucesso!");
         } catch (HttpClientErrorException e) {
             System.out.println("Error: " + e.getResponseBodyAsString());
             redirectAttributes.addFlashAttribute("error_message", e.getResponseBodyAsString());
