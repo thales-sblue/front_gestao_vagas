@@ -1,4 +1,4 @@
-package com.br.thalesdev.front_gestao_vagas.modules.candidate.controller;
+package com.br.thalesdev.front_gestao_vagas.modules.candidate.controllers;
 
 import java.util.UUID;
 
@@ -16,11 +16,11 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
-import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.ApplyJobService;
-import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.CandidateService;
-import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.CreateCandidateService;
-import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.FindJobsService;
-import com.br.thalesdev.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
+import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.ApplyJobService;
+import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.CandidateService;
+import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.CreateCandidateService;
+import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.FindJobsService;
+import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.ProfileCandidateService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

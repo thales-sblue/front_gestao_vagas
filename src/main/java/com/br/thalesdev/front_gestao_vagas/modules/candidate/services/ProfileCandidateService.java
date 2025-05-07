@@ -1,4 +1,4 @@
-package com.br.thalesdev.front_gestao_vagas.modules.candidate.service;
+package com.br.thalesdev.front_gestao_vagas.modules.candidate.services;
 
 import java.util.Map;
 
