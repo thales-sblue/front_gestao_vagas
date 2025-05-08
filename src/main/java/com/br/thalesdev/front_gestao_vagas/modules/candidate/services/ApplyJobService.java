@@ -2,6 +2,7 @@ package com.br.thalesdev.front_gestao_vagas.modules.candidate.services;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ApplyJobService {
 
+    @Value("${host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public String execute(String token, UUID idJob) {
         RestTemplate rt = new RestTemplate();
 
@@ -23,7 +27,9 @@ public class ApplyJobService {
 
         HttpEntity<UUID> request = new HttpEntity<>(idJob, headers);
 
-        var result = rt.postForObject("http://localhost:8080/candidate/job/apply", request, String.class);
+        String url = hostAPIGestaoVagas.concat("/candidate/job/apply");
+
+        var result = rt.postForObject(url, request, String.class);
 
         return result;
     }

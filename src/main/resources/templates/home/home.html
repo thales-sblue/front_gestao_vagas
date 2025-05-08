@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>VAGASYNC - Selecione o tipo de acesso</title>
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen overflow-hidden bg-gray-950 text-white flex items-center justify-center">
+    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(17,24,39,0.9)_0%,_rgba(0,0,0,1)_100%)]">
+        <div class="absolute inset-0 opacity-15 pointer-events-none">
+            <div class="absolute w-2 h-2 bg-purple-500 rounded-full float-animation" style="top:20%; left:15%"></div>
+            <div class="absolute w-1.5 h-1.5 bg-blue-400 rounded-full float-animation"
+                style="top:70%; left:85%; animation-delay: -2s"></div>
+            <div class="absolute w-1 h-1 bg-indigo-400 rounded-full float-animation"
+                style="top:45%; left:65%; animation-delay: -1s"></div>
+        </div>
+    </div>
+
+    <div
+        class="relative z-10 w-full max-w-md px-6 py-12 bg-gray-900/95 backdrop-blur-xl rounded-xl border border-gray-800 shadow-[0_0_30px_-5px_rgba(99,102,241,0.2)] space-y-10 text-center">
+        <h1
+            class="text-4xl font-black bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent tracking-tighter">
+            VAGASYNC</h1>
+        <p class="text-gray-400">Escolha como deseja acessar:</p>
+
+        <div class="space-y-4">
+            <a href="/company/login"
+                class="block w-full py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-purple-600 to-blue-600 hover:shadow-[0_0_25px_-5px_rgba(99,102,241,0.4)] transition-all">
+                Sou Empresa
+            </a>
+            <a href="/candidate/login"
+                class="block w-full py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-[0_0_25px_-5px_rgba(99,102,241,0.4)] transition-all">
+                Sou Candidato
+            </a>
+        </div>
+    </div>
+
+    <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <div class="absolute w-1 h-1 bg-white rounded-full animate-pulse" style="top:30%; left:20%"></div>
+        <div class="absolute w-1 h-1 bg-purple-400 rounded-full animate-pulse" style="top:65%; left:75%"></div>
+        <div class="absolute w-1 h-1 bg-blue-400 rounded-full animate-pulse" style="top:50%; left:90%"></div>
+    </div>
+</body>
+
+</html>

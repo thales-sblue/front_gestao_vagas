@@ -1,5 +1,6 @@
 package com.br.thalesdev.front_gestao_vagas.modules.company.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateCompanyService {
 
+    @Value("${host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public String execute(CreateCompanyDTO createCompanyDTO) {
         RestTemplate rt = new RestTemplate();
 
@@ -22,7 +26,9 @@ public class CreateCompanyService {
 
         HttpEntity<CreateCompanyDTO> request = new HttpEntity<>(createCompanyDTO, headers);
 
-        var result = rt.postForObject("http://localhost:8080/company/", request, String.class);
+        String url = hostAPIGestaoVagas.concat("/company/");
+
+        var result = rt.postForObject(url, request, String.class);
 
         return result;
     }

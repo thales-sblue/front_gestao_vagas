@@ -3,6 +3,7 @@ package com.br.thalesdev.front_gestao_vagas.modules.candidate.services;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,6 +18,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoginCandidateService {
 
+    @Value("${host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public Token execute(String username, String password) {
         RestTemplate rt = new RestTemplate();
 
@@ -29,7 +33,9 @@ public class LoginCandidateService {
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(data, headers);
 
-        var result = rt.postForObject("http://localhost:8080/candidate/auth", request, Token.class);
+        String url = hostAPIGestaoVagas.concat("/candidate/auth");
+
+        var result = rt.postForObject(url, request, Token.class);
 
         return result;
     }

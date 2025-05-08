@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@heroicons/v2.0.18/24/outline/index.js"></script>
+    <title>Perfil da Empresa</title>
+</head>
+
+<body class="relative min-h-screen overflow-hidden bg-gray-950">
+    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_rgba(17,24,39,0.8)_0%,_rgba(0,0,0,1)_100%)]">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,...')] opacity-10"></div>
+    </div>
+
+    <nav class="relative z-10 w-full px-6 py-4 bg-gray-900/80 backdrop-blur-md border-b border-gray-800 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-white tracking-tight">VAGASYNC</h1>
+            <div class="flex space-x-6 items-center">
+                <a href="/company/profile" class="text-gray-300 hover:text-purple-400 font-medium">Perfil</a>
+                <a href="/company/jobs" class="text-gray-300 hover:text-purple-400 font-medium">Vagas</a>
+                <a href="/company/logout"
+                    class="text-red-400 hover:text-red-100 font-medium px-2 py-1 rounded-lg border border-red-400/20 hover:border-red-300/40">
+                    Sair
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] px-6 text-center">
+        <div class="mb-6">
+            <div class="w-32 h-32 rounded-full bg-gray-800 flex items-center justify-center shadow-inner mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-gray-500" fill="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5zm0 2c-3.866 0-7 3.134-7 7h2c0-2.757 2.243-5 5-5s5 2.243 5 5h2c0-3.866-3.134-7-7-7z" />
+                </svg>
+            </div>
+        </div>
+
+        <h2 class="text-white text-3xl md:text-4xl font-semibold mb-4">Perfil da Empresa</h2>
+        <p class="text-gray-400 max-w-xl mb-10">
+            Aqui você pode visualizar os dados da sua empresa, como nome, e-mail, website e descrição.
+        </p>
+
+        <form th:object="${company}">
+            <div
+                class="w-full max-w-5xl bg-gray-900/95 backdrop-blur-xl p-10 rounded-2xl border border-gray-800 shadow-[0_0_40px_-10px_rgba(99,102,241,0.15)] text-left space-y-8 text-base">
+
+                <div class="grid grid-cols-12 gap-4 items-center border-b border-gray-700 pb-4">
+                    <span class="text-gray-400 font-medium col-span-3">Nome</span>
+                    <span th:text="${company.name}" class="text-gray-200 col-span-9 text-right break-words"></span>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 items-center border-b border-gray-700 pb-4">
+                    <span class="text-gray-400 font-medium col-span-3">Usuário</span>
+                    <span th:text="${company.username}" class="text-gray-200 col-span-9 text-right break-words"></span>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 items-center border-b border-gray-700 pb-4">
+                    <span class="text-gray-400 font-medium col-span-3">Email</span>
+                    <span th:text="${company.email}" class="text-gray-200 col-span-9 text-right break-all"></span>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 items-center border-b border-gray-700 pb-4">
+                    <span class="text-gray-400 font-medium col-span-3">Website</span>
+                    <span th:text="${company.website}" class="text-gray-200 col-span-9 text-right break-all"></span>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 items-start border-b border-gray-700 pb-4">
+                    <span class="text-gray-400 font-medium col-span-3 mt-1">Descrição</span>
+                    <span th:text="${company.description}"
+                        class="text-gray-200 col-span-9 text-right leading-relaxed break-words"></span>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

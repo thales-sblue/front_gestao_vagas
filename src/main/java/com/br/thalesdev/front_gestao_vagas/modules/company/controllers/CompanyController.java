@@ -18,13 +18,13 @@ import com.br.thalesdev.front_gestao_vagas.modules.company.services.CreateCompan
 import com.br.thalesdev.front_gestao_vagas.modules.company.services.CreateJobService;
 import com.br.thalesdev.front_gestao_vagas.modules.company.services.ListAllJobsByCompanyId;
 import com.br.thalesdev.front_gestao_vagas.modules.company.services.LoginCompanyService;
+import com.br.thalesdev.front_gestao_vagas.modules.company.services.ProfileCompanyService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/company")
@@ -35,6 +35,7 @@ public class CompanyController {
     private final LoginCompanyService loginCompanyService;
     private final CreateJobService createJobService;
     private final ListAllJobsByCompanyId listAllJobsByCompanyId;
+    private final ProfileCompanyService profileCompanyService;
 
     @GetMapping("/login")
     public String login() {
@@ -66,6 +67,19 @@ public class CompanyController {
             return "redirect:/company/login";
         }
 
+    }
+
+    @GetMapping("/profile")
+    @PreAuthorize("hasRole('COMPANY')")
+    public String profile(Model model) {
+        try {
+            var company = this.profileCompanyService.execute(getToken());
+            model.addAttribute("company", company);
+
+            return "company/profile";
+        } catch (HttpClientErrorException e) {
+            return "redirect:/company/login";
+        }
     }
 
     @GetMapping("/create")
@@ -111,7 +125,7 @@ public class CompanyController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", context);
         session.setAttribute("token", null);
 
-        return "redirect:/company/login";
+        return "redirect:/home/";
     }
 
     private String getToken() {

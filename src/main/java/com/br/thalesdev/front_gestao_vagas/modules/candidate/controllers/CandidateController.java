@@ -74,7 +74,6 @@ public class CandidateController {
     public String profile(Model model) {
 
         try {
-
             var user = this.profileCandidateService.execute(getToken());
             model.addAttribute("user", user);
 
@@ -124,6 +123,16 @@ public class CandidateController {
 
         model.addAttribute("candidate", candidate);
         return "redirect:/candidate/create";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        SecurityContext context = SecurityContextHolder.getContext();
+        session.setAttribute("SPRING_SECURITY_CONTEXT", context);
+        session.setAttribute("token", null);
+
+        return "redirect:/home/";
     }
 
     private String getToken() {

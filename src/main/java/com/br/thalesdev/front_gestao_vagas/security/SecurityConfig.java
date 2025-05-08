@@ -10,20 +10,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/candidate/login").permitAll();
-                    auth.requestMatchers("/candidate/create").permitAll()
-                            .requestMatchers("/candidate/signIn").permitAll()
-                            .requestMatchers("/company/login").permitAll()
-                            .requestMatchers("/company/signIn").permitAll()
-                            .requestMatchers("/company/create").permitAll();
-                    auth.anyRequest().authenticated();
-                })
-                .formLogin(form -> form.loginPage("/candidate/login"));
+        @Bean
+        SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers(
+                                                                "/home/",
+                                                                "/candidate/login",
+                                                                "/candidate/create",
+                                                                "/candidate/signIn",
+                                                                "/company/login",
+                                                                "/company/create",
+                                                                "/company/signIn")
+                                                .permitAll()
+                                                .anyRequest().authenticated())
+                                .formLogin(form -> form
+                                                .loginPage("/home/"));
 
-        return http.build();
-    }
+                return http.build();
+        }
 }
