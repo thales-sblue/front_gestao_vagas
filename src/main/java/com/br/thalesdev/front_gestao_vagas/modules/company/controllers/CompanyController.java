@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/company")
@@ -101,6 +102,16 @@ public class CompanyController {
         var result = this.createJobService.execute(jobs, getToken());
         System.out.println("Result: " + result);
         return "redirect:/company/jobs";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        SecurityContext context = SecurityContextHolder.getContext();
+        session.setAttribute("SPRING_SECURITY_CONTEXT", context);
+        session.setAttribute("token", null);
+
+        return "redirect:/company/login";
     }
 
     private String getToken() {
