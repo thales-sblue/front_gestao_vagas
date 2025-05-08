@@ -1,4 +1,4 @@
-package com.br.thalesdev.front_gestao_vagas.modules.candidate.services;
+package com.br.thalesdev.front_gestao_vagas.modules.company.services;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +15,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CandidateService {
+public class LoginCompanyService {
 
-    public Token login(String username, String password) {
+    public Token execute(String username, String password) {
         RestTemplate rt = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -29,8 +29,9 @@ public class CandidateService {
 
         HttpEntity<Map<String, String>> request = new HttpEntity<>(data, headers);
 
-        var result = rt.postForObject("http://localhost:8080/candidate/auth", request, Token.class);
+        var result = rt.postForObject("http://localhost:8080/company/auth", request, Token.class);
 
         return result;
     }
+
 }

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.dto.CreateCandidateDTO;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.ApplyJobService;
-import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.CandidateService;
+import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.LoginCandidateService;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.CreateCandidateService;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.FindJobsService;
 import com.br.thalesdev.front_gestao_vagas.modules.candidate.services.ProfileCandidateService;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class CandidateController {
 
-    private final CandidateService candidateService;
+    private final LoginCandidateService loginCandidateService;
     private final ProfileCandidateService profileCandidateService;
     private final FindJobsService findJobsService;
     private final ApplyJobService applyJobService;
@@ -48,7 +48,7 @@ public class CandidateController {
     public String signIn(RedirectAttributes redirectAttributes, HttpSession session, String username, String password) {
 
         try {
-            var token = this.candidateService.login(username, password);
+            var token = this.loginCandidateService.execute(username, password);
             var grants = token.getRoles().stream()
                     .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toString().toUpperCase())).toList();
 
